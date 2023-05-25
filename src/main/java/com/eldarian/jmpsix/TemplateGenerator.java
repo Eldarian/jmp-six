@@ -14,4 +14,12 @@ public class TemplateGenerator {
     public void putVariable(String key, String value) {
 
     }
+
+    private long search(String message, String substring) {
+        return 0L;
+    }
+
+    private void replace(String message, String substring, long start) {
+
+    }
 }
