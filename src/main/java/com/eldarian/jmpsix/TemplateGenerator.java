@@ -1,10 +1,19 @@
 package com.eldarian.jmpsix;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class TemplateGenerator {
 
-    private Map<String, String> variableMap;
+    public Map<String, String> getVariableMap() {
+        return variableMap;
+    }
+
+    public void setVariableMap(Map<String, String> variableMap) {
+        this.variableMap = variableMap;
+    }
+
+    private Map<String, String> variableMap = new HashMap<>();
 
     public String processMessage(String rawMessage) {
         //transforms template to message
@@ -12,14 +21,6 @@ public class TemplateGenerator {
     }
 
     public void putVariable(String key, String value) {
-
-    }
-
-    private long search(String message, String substring) {
-        return 0L;
-    }
-
-    private void replace(String message, String substring, long start) {
-
+        variableMap.put(key, value);
     }
 }

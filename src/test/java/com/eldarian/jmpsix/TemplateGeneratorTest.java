@@ -1,8 +1,16 @@
 package com.eldarian.jmpsix;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class TemplateGeneratorTest {
+    @BeforeEach
+    void setUp() {
+
+    }
 
     private TemplateGenerator templateGenerator;
     /*
@@ -38,5 +46,8 @@ public class TemplateGeneratorTest {
         //consumes initial placeholder-value pairs
         //consumes mock text with placeholder
         //replaces all occurences
+        templateGenerator.putVariable("key", "value");
+        templateGenerator.putVariable("name", "Dmitry");
+        assertEquals(templateGenerator.processMessage("Hey #{key}! Nice name!"), "Hey value! Nice name! And mine is ${name}.");
     }
 }
