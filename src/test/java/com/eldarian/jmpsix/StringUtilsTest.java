@@ -8,6 +8,8 @@ import java.nio.charset.StandardCharsets;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StringUtilsTest {
+
+    //TODO make a tests where wordToReplace length <= replacement and some borders like empty strings
     @Test
     void replaceWordInText() {
         String text = "I want to replace boredom to new word";

@@ -30,7 +30,7 @@ public class StringUtils {
      * @param originalString String to edit
      * @param substring string to insert instead
      * @param start start point of replacement
-     * @param end end point of replacement
+     * @param end end point of replacement, exclusive
      * @return new string
      */
     public static String replace(String originalString, String substring, int start, int end) {

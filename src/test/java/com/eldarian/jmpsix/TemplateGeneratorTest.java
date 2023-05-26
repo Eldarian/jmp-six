@@ -3,16 +3,42 @@ package com.eldarian.jmpsix;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TemplateGeneratorTest {
+    private TemplateGenerator templateGenerator;
+
+
     @BeforeEach
     void setUp() {
-
+        templateGenerator = new TemplateGenerator();
     }
+    private static Stream<Arguments> testData() {
+        Map<String, String> vars = new HashMap<>();
+        vars.put("name", "John");
+        vars.put("age", "30");
+        String template1 = "Hello #{name}! Your age is #{age}.";
+        String expectedMessage1 = "Hello John! Your age is 30.";
 
-    private TemplateGenerator templateGenerator;
+        Map<String, String> variables2 = new HashMap<>();
+        variables2.put("city", "London");
+        String template2 = "Welcome to #{city}.";
+        String expectedMessage2 = "Welcome to London.";
+
+        return Stream.of(
+                Arguments.of(vars, template1, expectedMessage1),
+                Arguments.of(variables2, template2, expectedMessage2)
+        );
+    }
     /*
         test cases:
     note: PH stands for placeholder (like #{key})
@@ -40,6 +66,14 @@ public class TemplateGeneratorTest {
     //  10. Latin-1 character set text should be processed as usual.
      */
 
+    @ParameterizedTest
+    @MethodSource("testData")
+    void processMessageTest_Parametrized(Map<String, String> vars, String template, String expectedMessage) {
+        templateGenerator.setVariableMap(vars);
+        assertEquals(expectedMessage, templateGenerator.processMessage(template));
+    }
+
+
     @Test
     void processMessageTest() {
         //basic test
@@ -48,6 +82,7 @@ public class TemplateGeneratorTest {
         //replaces all occurences
         templateGenerator.putVariable("key", "value");
         templateGenerator.putVariable("name", "Dmitry");
-        assertEquals(templateGenerator.processMessage("Hey #{key}! Nice name!"), "Hey value! Nice name! And mine is ${name}.");
+        assertEquals("Hey value! Nice name! And mine is Dmitry.",
+                templateGenerator.processMessage("Hey #{key}! Nice name! And mine is #{name}."));
     }
 }
