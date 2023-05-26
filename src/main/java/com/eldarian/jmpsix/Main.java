@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
+    static Messenger messenger;
+
     public static void main(String[] args) {
         // Check if console mode is specified
         if (args.length == 0) {
@@ -77,10 +79,9 @@ public class Main {
     }
 
     private static String processExpression(String expression) {
+        Template template = new Template(expression);
+        String message = messenger.sendMessage("homework", "karpau.aliaksei@email.com", template);
 
-
-        return "";
+        return message;
     }
-
-
 }

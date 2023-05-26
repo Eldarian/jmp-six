@@ -5,10 +5,6 @@ import java.util.Map;
 
 public class TemplateProcessor {
 
-    public Map<String, String> getVariableMap() {
-        return variableMap;
-    }
-
     public void setVariableMap(Map<String, String> variableMap) {
         this.variableMap = variableMap;
     }
@@ -28,7 +24,7 @@ public class TemplateProcessor {
     public String processMessage(String template) throws NullValueException{
         for(String key : variableMap.keySet()) {
             String keyWithBrackets = "#{" + key + "}";
-            int cursor = StringUtils.search(template, keyWithBrackets, 0);;
+            int cursor = StringUtils.search(template, keyWithBrackets, 0);
             while (cursor >= 0) {
                 String value = variableMap.get(key);
                 if(value == null) {

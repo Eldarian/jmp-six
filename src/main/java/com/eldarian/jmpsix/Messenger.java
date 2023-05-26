@@ -1,9 +1,5 @@
 package com.eldarian.jmpsix;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
-
 public class Messenger {
     TemplateProcessor templateProcessor = new TemplateProcessor();
     EmailService emailService;
