@@ -2,6 +2,9 @@ package com.eldarian.jmpsix;
 
 import org.junit.jupiter.api.Test;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StringUtilsTest {
@@ -38,6 +41,14 @@ public class StringUtilsTest {
     @Test
     void searchWordInText_TooBigOffset() {
         String text = "My findings of word is important, every word waits for it";
+        String wordToFind = "word";
+        assertEquals(Integer.MIN_VALUE, StringUtils.search(text, wordToFind, 1000));
+    }
+
+    @Test
+    void searchWordInText_Latin1() {
+        String original = "My findings of word is important, every word waits for it";
+        String text = new String(original.getBytes(), StandardCharsets.ISO_8859_1);
         String wordToFind = "word";
         assertEquals(Integer.MIN_VALUE, StringUtils.search(text, wordToFind, 1000));
     }
